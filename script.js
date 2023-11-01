@@ -27,6 +27,25 @@ function strikeThroughTodo(button, textDecoration, newText) {
    button.textContent = newText;
 }
 
+function switchEditState(button, displayValue, btnText, valueType, nameType, descriptionType) {
+   const todoItem = button.parentElement;
+   todoItem.children[2].style.display = displayValue;
+   todoItem.children[3].textContent = btnText;
+   const editName = todoItem.children[0];
+   const editDescription = todoItem.children[1];
+   let holdValues = [editName[valueType], editDescription[valueType]];
+   editName.remove();
+   editDescription.remove();
+   const newName = document.createElement(nameType);
+   const newDescription = document.createElement(descriptionType);
+   if(valueType == "value") valueType = "textContent";
+   else valueType = "value";
+   newName[valueType] = holdValues[0];
+   newDescription[valueType] = holdValues[1];
+   todoItem.insertAdjacentElement("afterBegin", newDescription);
+   todoItem.insertAdjacentElement("afterBegin", newName);
+}
+
 addBtn.addEventListener("click", submitButtonClicked);
 
 todoList.addEventListener("click", (e)=>{
@@ -40,18 +59,10 @@ todoList.addEventListener("click", (e)=>{
          xBtn.parentElement.remove();
       } else if(e.target.textContent == "Edit") {
          const editBtn = e.target;
-         const todoItem = editBtn.parentElement;
-         const editName = todoItem.children[0];
-         const editDescription = todoItem.children[1];
-         let holdValues = [editName.textContent, editDescription.textContent];
-         editName.remove();
-         editDescription.remove();
-         const newName = document.createElement("input");
-         const newDescription = document.createElement("input");
-         newName.value = holdValues[0];
-         newDescription.value = holdValues[1];
-         todoItem.insertAdjacentElement("afterBegin", newDescription);
-         todoItem.insertAdjacentElement("afterBegin", newName);
+         switchEditState(editBtn, "none", "Save", "textContent", "input", "input");
+      } else if(e.target.textContent == "Save") {
+         const saveBtn = e.target;
+         switchEditState(saveBtn, "inline-block", "Edit", "value", "h2", "p");
       }
    }
 });
