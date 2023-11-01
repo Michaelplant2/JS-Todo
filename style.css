@@ -71,6 +71,13 @@ h2 {
    background-color: white;
 }
 
+.edit-btn {
+   border: 1px solid black;
+   border-radius: 5px;
+   color: black;
+   background-color: white;
+}
+
 .x-btn {
    border: 1px solid black;
    border-radius: 5px;
