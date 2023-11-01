@@ -33,6 +33,7 @@ h1 {
 section {
    height: auto;
    min-height: 250px;
+   max-height: 350px;
    width: 47%;
    border: 1px solid black;
    margin: 1%;
@@ -41,7 +42,6 @@ section {
 #todo-input {
    display: flex;
    flex-direction: column;
-   max-height: 350px;
 }
 
 #todo-input-name {
@@ -58,6 +58,18 @@ section {
    font-size: 24px;
    font-weight: 600;
    background-color: green;
+}
+
+#todo-list {
+   overflow: auto;
+}
+
+li input:first-of-type {
+   margin-top: 30px;
+}
+
+li input {
+   margin: 5px 40% 5px 0;
 }
 
 h2 {
